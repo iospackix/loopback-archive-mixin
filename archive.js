@@ -55,7 +55,7 @@ module.exports = (Model, _options) => {
   Model.prototype.remove = Model.prototype.destroy;
   Model.prototype.delete = Model.prototype.destroy;
 
-  const queryNonDeleted = {isDeleted: false};
+  const queryNonDeleted = {isDeleted: {neq: true}};
 
   const _findOrCreate = Model.findOrCreate;
   Model.findOrCreate = function findOrCreateDeleted(_query, ...rest) {
