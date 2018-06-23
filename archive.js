@@ -39,9 +39,8 @@ module.exports = (Model, _options) => {
       }))
       .then(_output => output = _output)
       .then(() => this.notifyObserversOf('after archive', context))
-      .then(() => cb(null, output))
-      .then(() => output)
-      .catch(cb);
+      .then(result => (typeof cb === 'function') ? cb(null, output) : output)
+      .catch(error => (typeof cb === 'function') ? cb(error) : Promise.reject(error));
   };
 
   Model.remove = Model.destroyAll;
