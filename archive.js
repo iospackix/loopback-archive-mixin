@@ -7,13 +7,15 @@ module.exports = (Model, _options) => {
   Model.defineProperty(deletedAt, {type: Date, required: false});
   Model.defineProperty(isDeleted, {type: Boolean, required: true, default: false});
 
-  Model.destroyAll = function softDestroyAll(where, cb) {
+  Model.destroyAll = function softDestroyAll(where, cb, extraVar) {
     if (typeof cb !== 'function') {
       console.log('cb function');
-      console.log(String(cb));
+      console.log(cb);
       console.log('where filter');
       console.log(where);
       console.log('Non-function cb in destroyAll', cb);
+      console.log('Extra Var');
+      console.log(extraVar);
       cb = err => {
         if (!err) return;
         throw err;
