@@ -7,20 +7,20 @@ module.exports = (Model, _options) => {
   Model.defineProperty(deletedAt, {type: Date, required: false});
   Model.defineProperty(isDeleted, {type: Boolean, required: true, default: false});
 
-  Model.destroyAll = function softDestroyAll(where, cb, extraVar) {
-    if (typeof cb !== 'function') {
-      console.log('cb function');
-      console.log(cb);
-      console.log('where filter');
-      console.log(where);
-      console.log('Non-function cb in destroyAll', cb);
-      console.log('Extra Var');
-      console.log(extraVar);
-      cb = err => {
-        if (!err) return;
-        throw err;
-      };
-    }
+  Model.destroyAll = function softDestroyAll(where, cb) {
+//     if (typeof cb !== 'function') {
+//       console.log('cb function');
+//       console.log(cb);
+//       console.log('where filter');
+//       console.log(where);
+//       console.log('Non-function cb in destroyAll', cb);
+//       console.log('Extra Var');
+//       console.log(extraVar);
+//       cb = err => {
+//         if (!err) return;
+//         throw err;
+//       };
+//     }
     /**
      * Context constructed based on loopback-datasource-juggler
      * destroyAll context
@@ -46,11 +46,11 @@ module.exports = (Model, _options) => {
   Model.remove = Model.destroyAll;
   Model.deleteAll = Model.destroyAll;
 
-  Model.destroyById = function softDestroyById(id, options, cb) {
-    const callback = (cb === undefined && typeof options === 'function') ? options : cb;
+  Model.destroyById = function softDestroyById(id, cb) {
+   // const callback = (cb === undefined && typeof options === 'function') ? options : cb;
 //     console.log('Extra Var #2');
 //     console.log(extravar);
-    return this.destroyAll({id}, callback);
+    return this.destroyAll({id}, cb);
   };
 
   Model.removeById = Model.destroyById;
