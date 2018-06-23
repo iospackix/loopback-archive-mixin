@@ -47,10 +47,11 @@ module.exports = (Model, _options) => {
   Model.remove = Model.destroyAll;
   Model.deleteAll = Model.destroyAll;
 
-  Model.destroyById = function softDestroyById(id, cb, extravar) {
-    console.log('Extra Var #2');
-    console.log(extravar);
-    return this.destroyAll({id}, cb);
+  Model.destroyById = function softDestroyById(id, options, cb) {
+    const callback = (cb === undefined && typeof options === 'function') ? options : cb;
+//     console.log('Extra Var #2');
+//     console.log(extravar);
+    return this.destroyAll({id}, callback);
   };
 
   Model.removeById = Model.destroyById;
