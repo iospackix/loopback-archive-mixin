@@ -9,6 +9,10 @@ module.exports = (Model, _options) => {
 
   Model.destroyAll = function softDestroyAll(where, cb) {
     if (typeof cb !== 'function') {
+      console.log('cb function');
+      console.log(String(cb));
+      console.log('where filter');
+      console.log(where);
       console.log('Non-function cb in destroyAll', cb);
       cb = err => {
         if (!err) return;
