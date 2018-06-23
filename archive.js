@@ -54,8 +54,9 @@ module.exports = (Model, _options) => {
   Model.removeById = Model.destroyById;
   Model.deleteById = Model.destroyById;
 
-  Model.prototype.destroy = function softDestroy(cb) {
-    return Model.destroyById(this.id, cb);
+  Model.prototype.destroy = function softDestroy(options, cb) {
+    const callback = (cb === undefined && typeof options === 'function') ? options : cb;
+    return Model.destroyById(this.id, callback);
   };
 
   Model.prototype.remove = Model.prototype.destroy;
