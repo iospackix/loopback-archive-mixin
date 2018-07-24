@@ -4,8 +4,8 @@ module.exports = (Model, _options) => {
   const deletedAt = _options.deletedAt || 'deletedAt';
   const isDeleted = _options.isDeleted || 'isDeleted';
 
-  Model.defineProperty(deletedAt, {type: Date, required: false});
-  Model.defineProperty(isDeleted, {type: Boolean, required: true, default: false});
+  Model.defineProperty(deletedAt, {type: Date, required: false, index: true});
+  Model.defineProperty(isDeleted, {type: Boolean, required: true, default: false, index: true});
 
   Model.destroyAll = function softDestroyAll(where, cb) {
 //     if (typeof cb !== 'function') {
